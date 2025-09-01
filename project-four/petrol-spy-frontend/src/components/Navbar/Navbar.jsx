@@ -8,8 +8,8 @@ export default function Navbar() {
         <Link to="/">PetrolSpy</Link>
       </div>
       <nav>
-        <Link to="/sign-in">Sign in</Link>
-        <Link to="/sign-up">Sign up</Link>
+        <Link to="/users/sign-in/">Sign in</Link>
+        <Link to="/users/sign-up/">Sign up</Link>
       </nav>
     </header>
   );

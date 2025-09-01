@@ -1,0 +1,51 @@
+.form-section {
+    background-color: rgb(246 244 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form-section.column {
+    flex-direction: column;
+  }
+  
+  .form button {
+    background-color: #a774ce;
+  }
+  
+  .form h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    max-width: 100%;
+  }
+  
+  .form input:not([type="submit"]):not([type="checkbox"]), .form textarea, .form select {
+    min-height: 2.2rem;
+    background-color: #fff;
+    border: none;
+    padding: .5rem;
+    margin: .25rem 0 .5rem;
+  }
+  
+  .form button[type="submit"] {
+    display: inline-block;
+    margin-top: .5rem;
+  }
+  
+  .error-message {
+    font-size: 0.9em;
+    color: red;
+  }
+  
+  @media (min-width: 768px) {
+    .form-feature {
+      display: block;
+    }
+  }

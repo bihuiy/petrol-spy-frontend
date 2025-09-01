@@ -1,7 +1,12 @@
 import { Routes, Route } from "react-router";
-import "./App.css";
+
+// Global components
 import Navbar from "./components/Navbar/Navbar";
-import Home from "./components/Home/Home";
+import Footer from "./components/Footer/Footer";
+
+// Page components
+import Home from "./components/HomePage/HomePage";
+import SignUpPage from "./components/SignUpPage/SignUpPage";
 import Bookmark from "./components/Bookmark/Bookmark";
 
 function App() {
@@ -10,8 +15,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/bookmarks" element={<Bookmark />} />
+        <Route path="/users/sign-up/" element={<SignUpPage />} />
+        <Route path="/bookmarks/" element={<Bookmark />} />
       </Routes>
+      <Footer />
     </>
   );
 }
