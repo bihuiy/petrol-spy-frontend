@@ -1,6 +1,7 @@
 import "./SignUpForm.css";
 import { signUp } from "../../services/users";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function SignUpForm() {
   // * State
@@ -10,16 +11,19 @@ export default function SignUpForm() {
     password: "",
     password_confirmation: "",
   });
+
   const [errors, setErrors] = useState({});
+
+  // * Location variables
+  const navigate = useNavigate();
 
   // * Functions
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await signUp(formData);
+      navigate();
     } catch (error) {
-      console.log(error.response.data);
-
       setErrors(error.response.data);
     }
   };
@@ -32,7 +36,7 @@ export default function SignUpForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <h1>Create an account</h1>
+      <h2>Create an account</h2>
       <label htmlFor="email">Email</label>
       <input
         type="email"
@@ -79,7 +83,7 @@ export default function SignUpForm() {
         <p className="error-message">{errors.password_confirmation}</p>
       )}
 
-      <button type="submit">Submit</button>
+      <button type="submit">Create</button>
     </form>
   );
 }

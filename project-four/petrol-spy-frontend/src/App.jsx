@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 // Page components
 import Home from "./components/HomePage/HomePage";
 import SignUpPage from "./components/SignUpPage/SignUpPage";
+import SignInPage from "./components/SignInPage/SignInPage";
 import Bookmark from "./components/Bookmark/Bookmark";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users/sign-up/" element={<SignUpPage />} />
+        <Route path="/users/sign-in/" element={<SignInPage />} />
         <Route path="/bookmarks/" element={<Bookmark />} />
       </Routes>
       <Footer />
