@@ -5,20 +5,20 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 // Page components
-import Home from "./components/HomePage/HomePage";
+import Homepage from "./components/Homepage/Homepage";
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import SignInPage from "./components/SignInPage/SignInPage";
-import Bookmark from "./components/Bookmark/Bookmark";
+import BookmarkPage from "./components/BookmarkPage/BookmarkPage";
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Homepage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/bookmarks" element={<Bookmark />} />
+        <Route path="/bookmarks" element={<BookmarkPage />} />
       </Routes>
       <Footer />
     </>

@@ -1,4 +1,4 @@
-import "./Bookmark.css";
+import "./BookmarkPage.css";
 
 export default function Bookmark() {
   return (
