@@ -1,8 +1,14 @@
 import { signIn } from "../../services/users";
 import "./SignInForm.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { getUser, setToken } from "../../utils/auth";
+import { useNavigate } from "react-router";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function SignInForm() {
+  // * Context
+  const { setUser } = useContext(UserContext);
+
   // * State
   const [formData, setFormData] = useState({
     username: "",
@@ -10,10 +16,18 @@ export default function SignInForm() {
   });
   const [errors, setErrors] = useState({});
 
+  // * Location variables
+  const navigate = useNavigate();
+
+  // * Functions
   const handleSubmit = async (e) => {
+    setErrors({});
     e.preventDefault();
     try {
-      const res = await signIn(formData);
+      const { data } = await signIn(formData);
+      setToken(data.access);
+      setUser(getUser());
+      navigate("/");
     } catch (error) {
       setErrors(error.response.data);
     }
@@ -35,7 +49,6 @@ export default function SignInForm() {
         value={formData.username}
         onChange={handleChange}
       />
-      {errors.email && <p className="error-message">{errors.email}</p>}
 
       <label htmlFor="password">Password</label>
       <input
@@ -46,7 +59,7 @@ export default function SignInForm() {
         value={formData.password}
         onChange={handleChange}
       />
-      {errors.password && <p className="error-message">{errors.password}</p>}
+      {errors.detail && <p className="error-message">{errors.detail}</p>}
 
       <button type="submit">Sign in</button>
     </form>

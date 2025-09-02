@@ -1,9 +1,14 @@
 import "./SignUpForm.css";
 import { signUp } from "../../services/users";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import { getUser, setToken } from "../../utils/auth";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function SignUpForm() {
+  // * Context
+  const { setUser } = useContext(UserContext);
+
   // * State
   const [formData, setFormData] = useState({
     email: "",
@@ -19,10 +24,13 @@ export default function SignUpForm() {
 
   // * Functions
   const handleSubmit = async (e) => {
+    setErrors({});
     e.preventDefault();
     try {
-      const res = await signUp(formData);
-      navigate();
+      const { data } = await signUp(formData);
+      setToken(data.access);
+      setUser(getUser());
+      navigate("/");
     } catch (error) {
       setErrors(error.response.data);
     }
