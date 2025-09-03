@@ -2,15 +2,14 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import { createPortal } from "react-dom";
 
-const Marker = ({ map, feature, isActive, onClick }) => {
-  const { geometry, properties } = feature;
-
+const Marker = ({ map, station, isActive, onClick }) => {
+  const { latitude, longitude, brand } = station;
   const markerRef = useRef();
   const contentRef = useRef(document.createElement("div"));
 
   useEffect(() => {
     markerRef.current = new mapboxgl.Marker(contentRef.current)
-      .setLngLat([geometry.coordinates[0], geometry.coordinates[1]])
+      .setLngLat([longitude, latitude])
       .addTo(map);
 
     return () => {
@@ -21,7 +20,7 @@ const Marker = ({ map, feature, isActive, onClick }) => {
     <>
       {createPortal(
         <div
-          onClick={() => onClick(feature)}
+          onClick={() => onClick(station)}
           style={{
             display: "inline-block",
             padding: "2px 10px",
@@ -35,7 +34,7 @@ const Marker = ({ map, feature, isActive, onClick }) => {
             textAlign: "center",
           }}
         >
-          {properties.mag}
+          {brand}
         </div>,
         contentRef.current
       )}

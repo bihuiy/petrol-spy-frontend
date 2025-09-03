@@ -6,57 +6,66 @@ import "./Map.css";
 import Marker from "../Marker/Marker";
 import Popup from "../Popup/Popup";
 
-const INITIAL_CENTER = [151.2093, -33.8688];
-const INITIAL_ZOOM = 10.12;
+const INITIAL_CENTER = [151.1911, -33.8988];
+const INITIAL_ZOOM = 13.11;
 
 export default function Map() {
-  const mapRef = useRef();
-  const mapContainerRef = useRef();
+  const mapRef = useRef(); // The mapRef will persist the map instance so we can control the map throughout the lifecycle of this component
+  const mapContainerRef = useRef(); // The mapContainerRef exposes the map container's HTML element, and is used to tell Mapbox GL JS where to create the map
 
   // * State
   const [center, setCenter] = useState(INITIAL_CENTER);
   const [zoom, setZoom] = useState(INITIAL_ZOOM);
-  const [stations, setStations] = useState([]);
+  const [stationData, setStationData] = useState([]);
   const [error, setError] = useState("");
-  const [earthquakeData, setEarthquakeData] = useState();
-  const [activeFeature, setActiveFeature] = useState();
+  const [activeMarker, setActiveMarker] = useState();
 
+  // * Function
+  // Define and save the function for getting the map bounds and stations info
   const getBboxAndFetch = useCallback(async () => {
+    // Use useCallback to define and save the function instead of calling this function. We will call this function when required
     const bounds = mapRef.current.getBounds();
+    const bbox = [
+      bounds.getWest(),
+      bounds.getSouth(),
+      bounds.getEast(),
+      bounds.getNorth(),
+    ].join(","); // Convert array to string to use for query
 
     try {
-      const data = await fetch(
-        `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2024-01-01&endtime=2024-01-30&minlatitude=${bounds._sw.lat}&maxlatitude=${bounds._ne.lat}&minlongitude=${bounds._sw.lng}&maxlongitude=${bounds._ne.lng}`
-      ).then((d) => d.json());
-
-      setEarthquakeData(data);
-    } catch (error) {}
+      const { data } = await stationIndex(bbox);
+      console.log(data);
+      setStationData(data);
+    } catch (error) {
+      setError(error);
+    }
   }, []);
 
   // Initial the map
   useEffect(() => {
-    mapboxgl.accessToken =
-      "pk.eyJ1Ijoidml2aWVueWFuZzciLCJhIjoiY21ldTFlcG9jMDJjbzJpcHhhNDZyazB4bCJ9.ppKZ38utyXfhG-PG8E7fZw";
+    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
     mapRef.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       center: center,
       zoom: zoom,
     });
 
+    // Update React state when the map moves
+    mapRef.current.on("move", () => {
+      const mapCenter = mapRef.current.getCenter();
+      const mapZoom = mapRef.current.getZoom();
+      setCenter([mapCenter.lng, mapCenter.lat]);
+      setZoom(mapZoom);
+    });
+
+    // Get the map bounds and station data immediately after map loaded
     mapRef.current.on("load", () => {
       getBboxAndFetch();
     });
 
+    // Fired (refetch map bounds and station data after map view changes) just after the map completes a transition from one view to another
     mapRef.current.on("moveend", () => {
       getBboxAndFetch();
-    });
-
-    mapRef.current.on("move", () => {
-      const mapCenter = mapRef.current.getCenter();
-      const mapZoom = mapRef.current.getZoom();
-
-      setCenter([mapCenter.lng, mapCenter.lat]);
-      setZoom(mapZoom);
     });
 
     return () => {
@@ -64,61 +73,43 @@ export default function Map() {
     };
   }, []);
 
-  const handleButtonClick = () => {
+  // * Functions
+  const handleResetButtonClick = () => {
     mapRef.current.flyTo({ center: INITIAL_CENTER, zoom: INITIAL_ZOOM });
   };
 
-  const handleMarkerClick = (feature) => {
-    setActiveFeature(feature);
+  const handleMarkerClick = (station) => {
+    setActiveMarker(station);
   };
-
-  /*  // Get the stations info
-  useEffect(() => {
-    const getStationData = async () => {
-      try {
-        const { data } = await stationIndex();
-        setStations(data);
-      } catch (error) {
-        setError();
-      }
-    };
-    getStationData();
-  }, []); */
-
-  // Add markers
 
   return (
     <>
-      {/* <div>
-        {stations.map((station) => {
-          <div key={station.id}>{station.name}</div>;
-        })}
-      </div> */}
-
       <div id="map-container" ref={mapContainerRef}>
+        {" "}
+        {/* Attach a ref attribute to this <div> element */}
         <div className="sidebar">
           Longitude: {center[0].toFixed(4)} | Latitide: {center[1].toFixed(4)} |
           Zoom: {zoom.toFixed(2)}
         </div>
-        <button className="reset-button" onClick={handleButtonClick}>
+        <button className="reset-button" onClick={handleResetButtonClick}>
           Reset
         </button>
       </div>
       {mapRef.current &&
-        earthquakeData &&
-        earthquakeData.features?.map((feature) => {
+        stationData &&
+        stationData?.map((station) => {
           return (
             <Marker
-              key={feature.id}
+              key={station.id}
               map={mapRef.current}
-              feature={feature}
-              isActive={activeFeature?.id === feature.id}
+              station={station}
+              isActive={activeMarker?.id === station.id}
               onClick={handleMarkerClick}
             />
           );
         })}
       {mapRef.current && (
-        <Popup map={mapRef.current} activeFeature={activeFeature} />
+        <Popup map={mapRef.current} activeMarker={activeMarker} />
       )}
     </>
   );

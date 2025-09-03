@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import mapboxgl from "mapbox-gl";
 
-const Popup = ({ map, activeFeature }) => {
+const Popup = ({ map, activeMarker }) => {
   // a ref to hold the popup instance
   const popupRef = useRef();
   // a ref for an element to hold the popup's content
@@ -23,15 +23,15 @@ const Popup = ({ map, activeFeature }) => {
     };
   }, []);
 
-  // when activeFeature changes, set the popup's location and content, and add it to the map
+  // when activemarker changes, set the popup's location and content, and add it to the map
   useEffect(() => {
-    if (!activeFeature) return;
+    if (!activeMarker) return;
 
     popupRef.current
-      .setLngLat(activeFeature.geometry.coordinates) // set its position using activeFeature's geometry
+      .setLngLat([activeMarker.longitude, activeMarker.latitude])
       .setHTML(contentRef.current.outerHTML) // use contentRef's `outerHTML` to set the content of the popup
       .addTo(map); // add the popup to the map
-  }, [activeFeature]);
+  }, [activeMarker]);
 
   // use a react portal to render the content to show in the popup, assigning it to contentRef
   return (
@@ -42,23 +42,27 @@ const Popup = ({ map, activeFeature }) => {
             <tbody>
               <tr>
                 <td>
-                  <strong>Time</strong>
+                  <strong>Name</strong>
                 </td>
-                <td>
-                  {new Date(activeFeature?.properties.time).toLocaleString()}
-                </td>
+                <td>{activeMarker?.name}</td>
               </tr>
               <tr>
                 <td>
-                  <strong>Magnitude</strong>
+                  <strong>Address</strong>
                 </td>
-                <td>{activeFeature?.properties.mag}</td>
+                <td>{activeMarker?.address}</td>
               </tr>
               <tr>
                 <td>
-                  <strong>Place</strong>
+                  <strong>Price</strong>
                 </td>
-                <td>{activeFeature?.properties.place}</td>
+                <td>
+                  {activeMarker?.prices?.map((p) => (
+                    <div key={p.id}>
+                      {p.fuel_type}:{p.price}
+                    </div>
+                  ))}
+                </td>
               </tr>
             </tbody>
           </table>
