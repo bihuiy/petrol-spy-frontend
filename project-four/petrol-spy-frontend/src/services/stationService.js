@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getToken } from "../utils/auth";
 
 const BASE_URL = import.meta.env.VITE_API_URL + "/stations/";
 
@@ -8,4 +9,16 @@ export const stationIndex = (bbox) => {
 
 export const stationShow = (stationId) => {
   return axios.get(`${BASE_URL}/${stationId}`);
+}; //!!!
+
+export const bookmarkStation = (stationId) => {
+  return axios.post(`${BASE_URL}${stationId}/bookmark/`, null, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+};
+
+export const unbookmarkStation = (stationId) => {
+  return axios.delete(`${BASE_URL}${stationId}/bookmark/`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
 };
