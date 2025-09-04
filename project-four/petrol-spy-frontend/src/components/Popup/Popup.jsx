@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import mapboxgl from "mapbox-gl";
+import BookmarkButton from "../BookmarkButton/BookmarkButton";
 
-const Popup = ({ map, activeMarker }) => {
+const Popup = ({ map, activeMarker, user }) => {
   // a ref to hold the popup instance
   const popupRef = useRef();
   // a ref for an element to hold the popup's content
@@ -29,7 +30,7 @@ const Popup = ({ map, activeMarker }) => {
 
     popupRef.current
       .setLngLat([activeMarker.longitude, activeMarker.latitude])
-      .setHTML(contentRef.current.outerHTML) // use contentRef's `outerHTML` to set the content of the popup
+      .setDOMContent(contentRef.current)
       .addTo(map); // add the popup to the map
   }, [activeMarker]);
 
@@ -66,6 +67,7 @@ const Popup = ({ map, activeMarker }) => {
               </tr>
             </tbody>
           </table>
+          <BookmarkButton station={activeMarker} user={user} />
         </div>,
         contentRef.current
       )}

@@ -1,4 +1,5 @@
 import "./SignInPage.css";
+import { Link } from "react-router";
 
 // Form
 import SignInForm from "../SignInForm/SignInForm";
@@ -8,6 +9,7 @@ export default function SignInPage() {
     <main>
       <section className="form-section column">
         <SignInForm />
+        <Link to="/sign-up">Don't have an account?</Link>
       </section>
     </main>
   );

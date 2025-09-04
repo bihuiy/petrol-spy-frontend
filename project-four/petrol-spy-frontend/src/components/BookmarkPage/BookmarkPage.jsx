@@ -26,6 +26,17 @@ export default function BookmarkPage() {
   return (
     <main>
       <h1>{user.username}'s bookmarked stations</h1>
+      <div>
+        {bookmarks && bookmarks.length > 0 ? (
+          bookmarks.map((bookmark) => (
+            <div key={bookmark.id}>
+              {bookmark.owner}-{bookmark.bookmarked_station}-{bookmark.tag}
+            </div>
+          ))
+        ) : (
+          <p>Currently no bookmarks.</p>
+        )}
+      </div>
     </main>
   );
 }

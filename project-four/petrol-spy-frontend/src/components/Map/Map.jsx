@@ -1,15 +1,19 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useContext } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { stationIndex } from "../../services/stationService";
 import "./Map.css";
 import Marker from "../Marker/Marker";
 import Popup from "../Popup/Popup";
+import { UserContext } from "../../contexts/UserContext";
 
 const INITIAL_CENTER = [151.1911, -33.8988];
 const INITIAL_ZOOM = 13.11;
 
 export default function Map() {
+  // * Contexts
+  const user = useContext(UserContext);
+
   const mapRef = useRef(); // The mapRef will persist the map instance so we can control the map throughout the lifecycle of this component
   const mapContainerRef = useRef(); // The mapContainerRef exposes the map container's HTML element, and is used to tell Mapbox GL JS where to create the map
 
@@ -34,7 +38,6 @@ export default function Map() {
 
     try {
       const { data } = await stationIndex(bbox);
-      console.log(data);
       setStationData(data);
     } catch (error) {
       setError(error);
@@ -109,7 +112,7 @@ export default function Map() {
           );
         })}
       {mapRef.current && (
-        <Popup map={mapRef.current} activeMarker={activeMarker} />
+        <Popup map={mapRef.current} activeMarker={activeMarker} user={user} />
       )}
     </>
   );
