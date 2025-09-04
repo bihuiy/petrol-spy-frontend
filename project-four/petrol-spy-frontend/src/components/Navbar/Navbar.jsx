@@ -14,10 +14,11 @@ export default function Navbar() {
       <nav>
         {user ? (
           <>
+            <Link to="/bookmarks">{user.username}'s Bookmarks</Link>
+            <Link to="/price-records">{user.username}'s Price Records</Link>
             <Link to="/sign-in" onClick={signOut}>
               Sign out
             </Link>
-            <Link to="/bookmarks">{user.username}</Link>
           </>
         ) : (
           <>

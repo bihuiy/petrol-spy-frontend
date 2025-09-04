@@ -21,7 +21,7 @@ export default function BookmarkPage() {
       }
     };
     getBookmarkData();
-  }, [bookmarks]);
+  }, [user, bookmarks]);
 
   return (
     <main>
