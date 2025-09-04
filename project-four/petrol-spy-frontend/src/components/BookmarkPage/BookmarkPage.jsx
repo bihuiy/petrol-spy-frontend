@@ -2,6 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import "./BookmarkPage.css";
 import { bookmarkIndex } from "../../services/bookmarkService";
 import { UserContext } from "../../contexts/UserContext";
+import LoadingPage from "../LoadingPage/LoadingPage";
+import StationCard from "../StationCard/StationCard";
+import PriceRecordButton from "../PriceRecordButton/PriceRecordButton";
+import { searchBookmarks } from "../../utils/bookmarkSearch";
 
 export default function BookmarkPage() {
   // * Contexts
@@ -10,31 +14,43 @@ export default function BookmarkPage() {
   // * State
   const [bookmarks, setBookmarks] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const getBookmarkData = async () => {
+      setIsLoading(true);
       try {
         const { data } = await bookmarkIndex();
+        console.log(data);
+
         setBookmarks(data);
       } catch (error) {
         setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getBookmarkData();
-  }, [user, bookmarks]);
+  }, [user]);
+
+  const filteredBookmarks = searchBookmarks(bookmarks, query);
+
+  if (isLoading) return <LoadingPage />;
 
   return (
     <main>
       <h1>{user.username}'s bookmarked stations</h1>
       <div>
-        {bookmarks && bookmarks.length > 0 ? (
-          bookmarks.map((bookmark) => (
+        {filteredBookmarks && filteredBookmarks.length > 0 ? (
+          filteredBookmarks.map((bookmark) => (
             <div key={bookmark.id}>
-              {bookmark.owner}-{bookmark.bookmarked_station}-{bookmark.tag}
+              <StationCard station={bookmark.bookmarked_station} user={user} />
+              <PriceRecordButton bookmark={bookmark} user={user} />
             </div>
           ))
         ) : (
-          <p>Currently no bookmarks.</p>
+          <p>You don't have any bookmarks yet.</p>
         )}
       </div>
     </main>

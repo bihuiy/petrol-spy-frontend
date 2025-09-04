@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import mapboxgl from "mapbox-gl";
-import BookmarkButton from "../BookmarkButton/BookmarkButton";
+import StationCard from "../StationCard/StationCard";
 
 const Popup = ({ map, activeMarker, user }) => {
   // a ref to hold the popup instance
@@ -38,37 +38,7 @@ const Popup = ({ map, activeMarker, user }) => {
   return (
     <>
       {createPortal(
-        <div className="portal-content">
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <strong>Name</strong>
-                </td>
-                <td>{activeMarker?.name}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Address</strong>
-                </td>
-                <td>{activeMarker?.address}</td>
-              </tr>
-              <tr>
-                <td>
-                  <strong>Price</strong>
-                </td>
-                <td>
-                  {activeMarker?.prices?.map((p) => (
-                    <div key={p.id}>
-                      {p.fuel_type}:{p.price}
-                    </div>
-                  ))}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <BookmarkButton station={activeMarker} user={user} />
-        </div>,
+        <StationCard station={activeMarker} user={user} />,
         contentRef.current
       )}
     </>

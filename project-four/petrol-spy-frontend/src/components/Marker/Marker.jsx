@@ -15,7 +15,7 @@ const Marker = ({ map, station, isActive, onClick }) => {
     return () => {
       markerRef.current.remove();
     };
-  }, []);
+  },);
   return (
     <>
       {createPortal(

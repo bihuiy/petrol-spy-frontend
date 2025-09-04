@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
@@ -9,23 +9,14 @@ import {
 import { getToken } from "../../utils/auth";
 
 export default function BookmarkButton({ station, user }) {
-  // * Variable
-  const userBookmarks = user?.owned_bookmarks;
+  const isBookmarked = user?.owned_bookmarks?.some(
+    (b) => b.bookmarked_station.station_id === station.station_id
+  );
 
   // * State
-  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(isBookmarked);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user?.owned_bookmarks) {
-      setBookmarked(
-        user.owned_bookmarks.some(
-          (b) => b.bookmarked_station.station_id === station.station_id
-        )
-      );
-    }
-  }, [user, station]);
 
   // * Function
   const handleClick = async () => {

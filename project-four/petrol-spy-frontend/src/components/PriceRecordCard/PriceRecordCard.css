@@ -1,0 +1,32 @@
+.price-record-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.price-record-card h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.price-record-card p {
+  margin: 0.25rem 0;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+.price-table th,
+.price-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.price-table th {
+  background-color: #eee;
+}
