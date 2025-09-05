@@ -7,6 +7,7 @@ import StationCard from "../StationCard/StationCard";
 import PriceRecordButton from "../PriceRecordButton/PriceRecordButton";
 import { searchBookmarks } from "../../utils/bookmarkSearch";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import BookmarkButton from "../BookmarkButton/BookmarkButton";
 
 export default function BookmarkPage() {
   // * Contexts
@@ -54,7 +55,10 @@ export default function BookmarkPage() {
           filteredBookmarks.map((bookmark) => (
             <div className="bookmark-card" key={bookmark.id}>
               <StationCard station={bookmark.bookmarked_station} />
-              <PriceRecordButton bookmark={bookmark} user={user} />
+              <div className="card-actions">
+                <BookmarkButton station={bookmark.bookmarked_station} />
+                <PriceRecordButton bookmark={bookmark} user={user} />
+              </div>
             </div>
           ))
         ) : (

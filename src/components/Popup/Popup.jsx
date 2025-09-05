@@ -1,7 +1,9 @@
+import "./Popup.css"
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import mapboxgl from "mapbox-gl";
 import StationCard from "../StationCard/StationCard";
+import BookmarkButton from "../BookmarkButton/BookmarkButton";
 
 const Popup = ({ map, activeMarker }) => {
   // a ref to hold the popup instance
@@ -38,7 +40,10 @@ const Popup = ({ map, activeMarker }) => {
   return (
     <>
       {createPortal(
-        <StationCard station={activeMarker} />,
+        <div className="popup-display">
+          <StationCard station={activeMarker} />
+          <BookmarkButton station={activeMarker} />
+        </div>,
         contentRef.current
       )}
     </>

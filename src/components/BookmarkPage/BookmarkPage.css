@@ -45,6 +45,15 @@
     text-align: center;
   }
 
+  .card-actions {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;          
+    gap: 0.8rem;                   
+    margin-top: auto;
+    width: 100%;                   
+  }
+
   .bookmark-card button {
     align-self: flex-end;
     margin-top: auto;

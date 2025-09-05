@@ -23,8 +23,6 @@ export default function StationCard({ station }) {
           ))}
         </div>
       </div>
-
-      <BookmarkButton station={station} />
     </div>
   );
 }
