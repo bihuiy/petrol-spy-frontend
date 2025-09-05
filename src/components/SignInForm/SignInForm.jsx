@@ -30,8 +30,6 @@ export default function SignInForm() {
       setUser(getUser());
       navigate("/");
     } catch (error) {
-      console.log(error);
-      
       setError(error.response.data);
     }
   };
