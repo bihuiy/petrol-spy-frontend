@@ -8,18 +8,34 @@ import {
 } from "../../services/stationService";
 import { getToken } from "../../utils/auth";
 import { UserContext } from "../../contexts/UserContext";
+import { bookmarkIndex } from "../../services/bookmarkService";
 
 export default function BookmarkButton({ station }) {
   const { user } = useContext(UserContext);
 
-  const isBookmarked = user?.owned_bookmarks?.some(
-    (b) => b.bookmarked_station.station_id === station.station_id
-  );
-
   // * State
-  const [bookmarked, setBookmarked] = useState(isBookmarked);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarks, setBookmarks] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  // * Fetch all bookmarks on mount
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const { data } = await bookmarkIndex();
+        setBookmarks(data);
+        const isBookmarked = data.some(
+          (b) => b.bookmarked_station.station_id === station.station_id
+        );
+        setBookmarked(isBookmarked);
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    fetchBookmarks();
+  }, [station?.station_id]);
 
   // * Function
   const handleClick = async () => {
@@ -27,8 +43,14 @@ export default function BookmarkButton({ station }) {
     try {
       if (bookmarked) {
         await unbookmarkStation(station.station_id);
+        setBookmarks(
+          bookmarks.filter((b) => {
+            b.bookmarked_station.station_id !== station.station_id;
+          })
+        );
       } else {
-        await bookmarkStation(station.station_id);
+        const newBookmark = await bookmarkStation(station.station_id);
+        setBookmarks([...bookmarks, newBookmark]);
       }
       setBookmarked(!bookmarked);
     } catch (error) {
