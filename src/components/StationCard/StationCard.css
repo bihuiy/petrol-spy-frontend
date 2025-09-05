@@ -1,0 +1,43 @@
+.station-card {
+  display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 220px;
+    background-color: #f3e8dc;
+    text-align: center;
+}
+  
+  .station-name {
+    font-size: 1.1rem;
+    color: black;
+  }
+  
+  .station-address {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .station-address hr {
+    margin-top: 4px;
+    border: none;
+    border-top: 1px solid #ccc;
+  }
+  
+  .station-prices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  
+  .price-item {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .fuel-type {
+    font-weight: bold;
+    margin-right: 4px;
+  }
+  
+  
