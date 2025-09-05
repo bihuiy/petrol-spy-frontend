@@ -5,12 +5,18 @@ import "./styles/index.css";
 import "./styles/forms.css";
 import App from "./App.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
+import { PetrolProvider } from "./contexts/PetrolContext.jsx";
+import { MapProvider } from "./contexts/MapContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <MapProvider>
+          <PetrolProvider>
+            <App />
+          </PetrolProvider>
+        </MapProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>

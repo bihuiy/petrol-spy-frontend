@@ -6,20 +6,19 @@ import "./Map.css";
 import Marker from "../Marker/Marker";
 import Popup from "../Popup/Popup";
 import { UserContext } from "../../contexts/UserContext";
-
-const INITIAL_CENTER = [151.1911, -33.8988];
-const INITIAL_ZOOM = 13.11;
+import { MapContext } from "../../contexts/MapContext";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export default function Map() {
   // * Contexts
   const user = useContext(UserContext);
+  const { center, setCenter, zoom, setZoom, INITIAL_CENTER, INITIAL_ZOOM } =
+    useContext(MapContext);
 
   const mapRef = useRef(); // The mapRef will persist the map instance so we can control the map throughout the lifecycle of this component
   const mapContainerRef = useRef(); // The mapContainerRef exposes the map container's HTML element, and is used to tell Mapbox GL JS where to create the map
 
   // * State
-  const [center, setCenter] = useState(INITIAL_CENTER);
-  const [zoom, setZoom] = useState(INITIAL_ZOOM);
   const [stationData, setStationData] = useState([]);
   const [error, setError] = useState("");
   const [activeMarker, setActiveMarker] = useState();
@@ -85,15 +84,12 @@ export default function Map() {
     setActiveMarker(station);
   };
 
+  if (error) return <ErrorPage error={error} />;
+
   return (
     <>
       <div id="map-container" ref={mapContainerRef}>
-        {" "}
         {/* Attach a ref attribute to this <div> element */}
-        <div className="sidebar">
-          Longitude: {center[0].toFixed(4)} | Latitide: {center[1].toFixed(4)} |
-          Zoom: {zoom.toFixed(2)}
-        </div>
         <button className="reset-button" onClick={handleResetButtonClick}>
           Reset
         </button>

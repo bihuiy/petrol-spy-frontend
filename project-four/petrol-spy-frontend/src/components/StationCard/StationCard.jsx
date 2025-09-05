@@ -1,38 +1,30 @@
 import "./StationCard.css";
 import BookmarkButton from "../BookmarkButton/BookmarkButton";
 
-export default function StationCard({ station, user }) {
+export default function StationCard({ station }) {
   return (
     <div className="station-card">
-      <table>
-        <tbody>
-          <tr>
-            <td>
-              <strong>Name</strong>
-            </td>
-            <td>{station?.name}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Address</strong>
-            </td>
-            <td>{station?.address}</td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Price</strong>
-            </td>
-            <td>
-              {station?.prices?.map((p) => (
-                <div key={p.id}>
-                  {p.fuel_type}:{p.price}
-                </div>
-              ))}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <BookmarkButton station={station} user={user} />
+      <div className="station-info">
+        <div className="station-name">
+          {station?.name} (ID {station?.station_id})
+        </div>
+
+        <div className="station-address">
+          {station?.address}
+          <hr />
+        </div>
+
+        <div className="station-prices">
+          {station?.prices?.map((p) => (
+            <div className="price-item" key={p.id}>
+              <span className="fuel-type">{p.fuel_type}</span>:{" "}
+              <span className="fuel-price">{p.price}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <BookmarkButton station={station} />
     </div>
   );
 }

@@ -1,0 +1,67 @@
+.bookmark-page {
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    padding: 2rem;
+  }
+  
+  .bookmark-page h1 {
+    margin-bottom: 1.5rem;
+    color: #4c506d;
+  }
+  
+  .bookmark-page input {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .bookmark-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: flex-start;
+  }
+  
+  .bookmark-card {
+    background: #f3e8dc;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+    padding: 1rem;
+    flex: 1 1 calc(25% - 1.5rem);
+    min-width: 220px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+  }
+  
+  .bookmark-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .bookmark-card button {
+    align-self: flex-end;
+    margin-top: auto;
+  }  
+  
+  .price-record-btn {
+    margin-top: 0.8rem;
+    padding: 6px 14px;
+    background-color: #355381;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .price-record-btn:hover {
+    background-color: #2c4366;
+  }
+  

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import mapboxgl from "mapbox-gl";
 import StationCard from "../StationCard/StationCard";
 
-const Popup = ({ map, activeMarker, user }) => {
+const Popup = ({ map, activeMarker }) => {
   // a ref to hold the popup instance
   const popupRef = useRef();
   // a ref for an element to hold the popup's content
@@ -38,7 +38,7 @@ const Popup = ({ map, activeMarker, user }) => {
   return (
     <>
       {createPortal(
-        <StationCard station={activeMarker} user={user} />,
+        <StationCard station={activeMarker} />,
         contentRef.current
       )}
     </>

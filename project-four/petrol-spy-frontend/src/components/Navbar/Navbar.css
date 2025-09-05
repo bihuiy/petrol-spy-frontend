@@ -1,53 +1,99 @@
+header, footer, .logo, nav, select, option, .nav-btn {
+  font-family: "Poppins", sans-serif;
+}
+
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
-  }
-  
-  .logo {
-    font-size: 1.2rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
-    width: 2rem;
-  }
-  
-  nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1.5rem;
+  background: #4c506d;
+  color: #e0c68b;
+}
+
+header a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+header a:hover {
+  color: #e0c68b;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+.map-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+
+.sidebar {
+  background-color: #4c506d;
+    color: #fff;
+    padding: 6px 12px;
+    
+}
+
+.petrol-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.petrol-filter label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.petrol-filter select {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: #355381;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+nav a:hover {
+  color: #e0c68b;
+}
+
+.nav-btn {
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: #a37070;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: #e9ecef;
+}
+
+nav .tablet-up {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  nav .tablet-up {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1rem;
   }
-  
-  nav a.icon {
-    display: flex;
-    font-size: 1.5rem;
-  }
-  
-  nav hr {
-    width: 1px;
-    height: 1.25rem;
-    border: none;
-    background: rgba(0,0,0,0.25);
-  }
-  
-  nav .tablet-up {
-    display: none;
-  }
-  
-  @media (min-width: 768px) {
-    header {
-      padding: 1rem 2rem;
-    }
-  
-    nav .tablet-up {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-  }
+}

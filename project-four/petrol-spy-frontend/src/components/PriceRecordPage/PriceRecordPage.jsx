@@ -5,6 +5,9 @@ import { priceRecordIndex } from "../../services/priceRecordService";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import PriceRecordCard from "../PriceRecordCard/PriceRecordCard";
 import { searchRecords } from "../../utils/recordSearch";
+import { MdDelete } from "react-icons/md";
+import { priceRecordDelete } from "../../services/priceRecordService";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export default function PriceRecordPage() {
   // * Contexts
@@ -20,8 +23,6 @@ export default function PriceRecordPage() {
       setIsLoading(true);
       try {
         const { data } = await priceRecordIndex();
-        console.log(data); //???
-
         setPriceRecords(data);
       } catch (error) {
         setError(error);
@@ -32,12 +33,23 @@ export default function PriceRecordPage() {
     getPriceRecordData();
   }, [user]);
 
+  const handleClick = async (priceRecordId) => {
+    try {
+      await priceRecordDelete(priceRecordId);
+      const { data } = await priceRecordIndex();
+      setPriceRecords(data);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   const filteredRecords = searchRecords(priceRecords, query);
 
   if (isLoading) return <LoadingPage />;
+  if (error) return <ErrorPage error={error} />;
 
   return (
-    <main>
+    <main className="price-record-page">
       <h1>{user.username}'s price record</h1>
       <div>
         <input
@@ -47,11 +59,14 @@ export default function PriceRecordPage() {
           onChange={(event) => setQuery(event.target.value)}
         />
       </div>
-      <div>
+      <div className="price-record-grid">
         {filteredRecords && filteredRecords.length > 0 ? (
           filteredRecords.map((priceRecord) => (
-            <div key={priceRecord.id}>
+            <div className="price-record-cards" key={priceRecord.id}>
               <PriceRecordCard priceRecord={priceRecord} />
+              <button onClick={() => handleClick(priceRecord.id)}>
+                <MdDelete />
+              </button>
             </div>
           ))
         ) : (

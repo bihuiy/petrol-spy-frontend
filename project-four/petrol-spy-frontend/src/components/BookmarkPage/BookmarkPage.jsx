@@ -6,6 +6,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import StationCard from "../StationCard/StationCard";
 import PriceRecordButton from "../PriceRecordButton/PriceRecordButton";
 import { searchBookmarks } from "../../utils/bookmarkSearch";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export default function BookmarkPage() {
   // * Contexts
@@ -22,8 +23,6 @@ export default function BookmarkPage() {
       setIsLoading(true);
       try {
         const { data } = await bookmarkIndex();
-        console.log(data);
-
         setBookmarks(data);
       } catch (error) {
         setError(error);
@@ -37,15 +36,24 @@ export default function BookmarkPage() {
   const filteredBookmarks = searchBookmarks(bookmarks, query);
 
   if (isLoading) return <LoadingPage />;
+  if (error) return <ErrorPage error={error} />;
 
   return (
-    <main>
+    <main className="bookmark-page">
       <h1>{user.username}'s bookmarked stations</h1>
       <div>
+        <input
+          type="text"
+          placeholder="Search by name, address or id..."
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+      </div>
+      <div className="bookmark-grid">
         {filteredBookmarks && filteredBookmarks.length > 0 ? (
           filteredBookmarks.map((bookmark) => (
-            <div key={bookmark.id}>
-              <StationCard station={bookmark.bookmarked_station} user={user} />
+            <div className="bookmark-card" key={bookmark.id}>
+              <StationCard station={bookmark.bookmarked_station} />
               <PriceRecordButton bookmark={bookmark} user={user} />
             </div>
           ))

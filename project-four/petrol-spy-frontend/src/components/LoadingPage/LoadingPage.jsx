@@ -1,3 +1,5 @@
+import "./LoadingPage.css";
+
 export default function LoadingPage() {
   return (
     <main className="loading-page">

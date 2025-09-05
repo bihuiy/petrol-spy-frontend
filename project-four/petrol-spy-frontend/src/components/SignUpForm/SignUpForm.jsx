@@ -4,6 +4,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import { getUser, setToken } from "../../utils/auth";
 import { UserContext } from "../../contexts/UserContext";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export default function SignUpForm() {
   // * Context
@@ -17,14 +18,14 @@ export default function SignUpForm() {
     password_confirmation: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState({});
 
   // * Location variables
   const navigate = useNavigate();
 
   // * Functions
   const handleSubmit = async (e) => {
-    setErrors({});
+    setError({});
     e.preventDefault();
     try {
       const { data } = await signUp(formData);
@@ -32,7 +33,7 @@ export default function SignUpForm() {
       setUser(getUser());
       navigate("/");
     } catch (error) {
-      setErrors(error.response.data);
+      setError(error.response.data);
     }
   };
 
@@ -41,6 +42,8 @@ export default function SignUpForm() {
     newFormData[e.target.name] = e.target.value;
     setFormData(newFormData);
   };
+
+  if (error) return <ErrorPage error={error} />;
 
   return (
     <form className="form" onSubmit={handleSubmit}>
@@ -54,7 +57,7 @@ export default function SignUpForm() {
         value={formData.email}
         onChange={handleChange}
       />
-      {errors.email && <p className="error-message">{errors.email}</p>}
+      {error.email && <p className="error-message">{error.email}</p>}
 
       <label htmlFor="username">Username</label>
       <input
@@ -65,7 +68,7 @@ export default function SignUpForm() {
         value={formData.username}
         onChange={handleChange}
       />
-      {errors.username && <p className="error-message">{errors.username}</p>}
+      {error.username && <p className="error-message">{error.username}</p>}
 
       <label htmlFor="password">Password</label>
       <input
@@ -76,7 +79,7 @@ export default function SignUpForm() {
         value={formData.password}
         onChange={handleChange}
       />
-      {errors.password && <p className="error-message">{errors.password}</p>}
+      {error.password && <p className="error-message">{error.password}</p>}
 
       <label htmlFor="password_confirmation">Type your password again</label>
       <input
@@ -87,8 +90,8 @@ export default function SignUpForm() {
         value={formData.password_confirmation}
         onChange={handleChange}
       />
-      {errors.password_confirmation && (
-        <p className="error-message">{errors.password_confirmation}</p>
+      {error.password_confirmation && (
+        <p className="error-message">{error.password_confirmation}</p>
       )}
 
       <button type="submit">Create</button>

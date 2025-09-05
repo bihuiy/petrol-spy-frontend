@@ -11,19 +11,6 @@
     width: 100%;
   }
   
-  .sidebar {
-    background-color: rgb(35 55 75 / 90%);
-    color: #fff;
-    padding: 6px 12px;
-    font-family: monospace;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 12px;
-    border-radius: 4px;
-  }
-  
   .reset-button {
     position: absolute;
     top: 50px;
@@ -32,4 +19,6 @@
     padding: 4px 10px;
     border-radius: 10px;
     cursor: pointer;
+    background-color: #4c506d;
+    color: #fff
   }

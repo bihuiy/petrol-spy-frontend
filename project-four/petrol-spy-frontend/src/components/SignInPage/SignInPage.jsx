@@ -9,7 +9,9 @@ export default function SignInPage() {
     <main>
       <section className="form-section column">
         <SignInForm />
-        <Link to="/sign-up">Don't have an account?</Link>
+        <div className="link">
+          <Link to="/sign-up">Don't have an account?</Link>
+        </div>
       </section>
     </main>
   );
