@@ -1,0 +1,8 @@
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    font-family: "Poppins", sans-serif;
+    color: #4c506d;
+  }
