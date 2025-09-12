@@ -7,10 +7,6 @@ export const stationIndex = (bbox) => {
   return axios.get(`${BASE_URL}?bbox=${bbox}`);
 };
 
-export const stationShow = (stationId) => {
-  return axios.get(`${BASE_URL}/${stationId}`);
-}; //!!!
-
 export const bookmarkStation = (stationId) => {
   return axios.post(`${BASE_URL}${stationId}/bookmark/`, null, {
     headers: { Authorization: `Bearer ${getToken()}` },
