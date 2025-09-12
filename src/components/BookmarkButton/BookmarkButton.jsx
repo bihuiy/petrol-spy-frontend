@@ -1,7 +1,7 @@
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
 import { BookmarkContext } from "../../contexts/BookmarkContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useNavigate } from "react-router";
 import {
@@ -13,18 +13,16 @@ export default function BookmarkButton({ station }) {
   // * Context
   const { bookmarks, setBookmarks } = useContext(BookmarkContext);
   const { user } = useContext(UserContext);
-  // * State
-  const [isBookmarked, setIsBookmarked] = useState(
-    bookmarks.some(
-      (b) => b.bookmarked_station?.station_id === station?.station_id
-    )
-  );
 
   const navigate = useNavigate();
 
   // * Function
   const handleClick = async () => {
     if (!user) return navigate("/sign-up");
+    const isBookmarked = bookmarks.some(
+      (b) => b.bookmarked_station?.station_id === station?.station_id
+    );
+
     try {
       if (isBookmarked) {
         setBookmarks(
@@ -32,21 +30,24 @@ export default function BookmarkButton({ station }) {
             (b) => b.bookmarked_station?.station_id !== station.station_id
           )
         );
-        setIsBookmarked(false);
+
         await unbookmarkStation(station.station_id);
       } else {
-        const newBookmark = await bookmarkStation(station.station_id);
-        setBookmarks([...bookmarks, newBookmark]);
-        setIsBookmarked(true);
+        const { data } = await bookmarkStation(station.station_id);
+        setBookmarks([...bookmarks, data]);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  const isBookmarkedNow = bookmarks.some((b) => {
+    return b.bookmarked_station?.station_id === station?.station_id;
+  });
+
   return (
     <button onClick={handleClick}>
-      {isBookmarked ? <MdOutlineBookmarkAdded /> : <MdOutlineBookmarkAdd />}
+      {isBookmarkedNow ? <MdOutlineBookmarkAdded /> : <MdOutlineBookmarkAdd />}
     </button>
   );
 }
