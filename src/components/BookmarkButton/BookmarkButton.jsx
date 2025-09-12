@@ -16,12 +16,13 @@ export default function BookmarkButton({ station }) {
 
   const navigate = useNavigate();
 
+  const isBookmarked = bookmarks.some(
+    (b) => b.bookmarked_station?.station_id === station?.station_id
+  );
+
   // * Function
   const handleClick = async () => {
     if (!user) return navigate("/sign-up");
-    const isBookmarked = bookmarks.some(
-      (b) => b.bookmarked_station?.station_id === station?.station_id
-    );
 
     try {
       if (isBookmarked) {
@@ -41,13 +42,9 @@ export default function BookmarkButton({ station }) {
     }
   };
 
-  const isBookmarkedNow = bookmarks.some((b) => {
-    return b.bookmarked_station?.station_id === station?.station_id;
-  });
-
   return (
     <button onClick={handleClick}>
-      {isBookmarkedNow ? <MdOutlineBookmarkAdded /> : <MdOutlineBookmarkAdd />}
+      {isBookmarked ? <MdOutlineBookmarkAdded /> : <MdOutlineBookmarkAdd />}
     </button>
   );
 }
