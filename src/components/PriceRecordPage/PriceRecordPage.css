@@ -1,5 +1,5 @@
 .price-record-page {
-  min-height: 100vh;
+  min-height: calc(100vh - 144px);
   font-family: "Poppins", sans-serif;
   padding: 2rem;
   text-align: center;
@@ -10,24 +10,23 @@
     color: #4c506d;
   }
 
-  .price-record-page input {
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-bottom: 2rem;
-    width: 100%;
-    max-width: 400px;
-  }
-
   .price-record-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: flex-start;
   }
+
+  .price-record-grid .empty-bookmarks {
+    margin: 2rem auto;
+    color: #4c506d;
+  }
   
-  .price-record-cards {
-    background: #f3e8dc;
+  .price-record-card {
+    gap: 0.5rem;
+    background-color: #a37070;
+    text-align: center;
+    color:#d8d0d0;
     border-radius: 10px;
     box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
     padding: 1rem;
@@ -39,7 +38,8 @@
     align-items: center;
   }
 
-  .price-record-cards button {
+  .price-record-card button {
     align-self: flex-end;
     margin-top: auto;
+    color: #a37070;
   }

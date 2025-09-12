@@ -7,6 +7,9 @@ export function searchBookmarks(bookmarks, query) {
     (bookmark) =>
       bookmark.bookmarked_station.name.toLowerCase().includes(lowerQuery) ||
       bookmark.bookmarked_station.address.toLowerCase().includes(lowerQuery) ||
-      bookmark.bookmarked_station.station_id.toLowerCase().includes(lowerQuery)
+      bookmark.bookmarked_station.station_id
+        .toLowerCase()
+        .includes(lowerQuery) ||
+      bookmark.tag?.toLowerCase().includes(lowerQuery)
   );
 }

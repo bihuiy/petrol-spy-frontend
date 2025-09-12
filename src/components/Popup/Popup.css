@@ -3,3 +3,9 @@
     flex-direction: column;
     align-items: center;
 }
+
+.popup-display button {
+    margin-top: 0.5rem;
+    background-color: #4c506d;
+    color: #f3e8dc;
+}

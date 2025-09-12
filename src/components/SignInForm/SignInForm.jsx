@@ -4,7 +4,6 @@ import { useState, useContext } from "react";
 import { getUser, setToken } from "../../utils/auth";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
-import ErrorPage from "../ErrorPage/ErrorPage";
 
 export default function SignInForm() {
   // * Context
@@ -37,8 +36,6 @@ export default function SignInForm() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  //if (error) return <ErrorPage error={error} />;
 
   return (
     <form className="form" onSubmit={handleSubmit}>

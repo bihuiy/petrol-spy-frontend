@@ -1,16 +1,34 @@
-.price-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 0.5rem;
-}
-
-.price-table th,
-.price-table td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  text-align: left;
-}
-
-.price-table th {
-  background-color: #eee;
-}
+  .price-record-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .price-record-address, .snapshot-time {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
+  .snapshot-time hr {
+    margin-top: 4px;
+    border: none;
+    border-top: 1px solid #d8d0d0;
+  }
+  
+  .price-record-prices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  
+  .price-item {
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .fuel-type {
+    font-weight: bold;
+    margin-right: 4px;
+  }
+  
+  

@@ -1,66 +1,52 @@
-import { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
-import {
-  unbookmarkStation,
-  bookmarkStation,
-} from "../../services/stationService";
-import { getToken } from "../../utils/auth";
+import { BookmarkContext } from "../../contexts/BookmarkContext";
+import { useContext, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { bookmarkIndex } from "../../services/bookmarkService";
+import { useNavigate } from "react-router";
+import {
+  bookmarkStation,
+  unbookmarkStation,
+} from "../../services/stationService";
 
 export default function BookmarkButton({ station }) {
+  // * Context
+  const { bookmarks, setBookmarks } = useContext(BookmarkContext);
   const { user } = useContext(UserContext);
-
   // * State
-  const [bookmarked, setBookmarked] = useState(false);
-  const [bookmarks, setBookmarks] = useState([]);
-  const [error, setError] = useState(null);
+  const [isBookmarked, setIsBookmarked] = useState(
+    bookmarks.some(
+      (b) => b.bookmarked_station?.station_id === station?.station_id
+    )
+  );
+
   const navigate = useNavigate();
-
-  // * Fetch all bookmarks on mount
-  useEffect(() => {
-    const fetchBookmarks = async () => {
-      try {
-        const { data } = await bookmarkIndex();
-        setBookmarks(data);
-        const isBookmarked = data.some(
-          (b) => b.bookmarked_station.station_id === station.station_id
-        );
-        setBookmarked(isBookmarked);
-      } catch (error) {
-        setError(error);
-      }
-    };
-
-    fetchBookmarks();
-  }, [station?.station_id]);
 
   // * Function
   const handleClick = async () => {
-    if (!user || !getToken()) return navigate("/sign-up");
+    if (!user) return navigate("/sign-up");
     try {
-      if (bookmarked) {
-        await unbookmarkStation(station.station_id);
+      if (isBookmarked) {
         setBookmarks(
-          bookmarks.filter((b) => {
-            b.bookmarked_station.station_id !== station.station_id;
-          })
+          bookmarks.filter(
+            (b) => b.bookmarked_station?.station_id !== station.station_id
+          )
         );
+        setIsBookmarked(false);
+        await unbookmarkStation(station.station_id);
       } else {
         const newBookmark = await bookmarkStation(station.station_id);
         setBookmarks([...bookmarks, newBookmark]);
+        setIsBookmarked(true);
       }
-      setBookmarked(!bookmarked);
     } catch (error) {
-      setError(error);
+      console.log(error);
     }
   };
 
   return (
     <button onClick={handleClick}>
-      {bookmarked ? <MdOutlineBookmarkAdded /> : <MdOutlineBookmarkAdd />}
+      {isBookmarked ? <MdOutlineBookmarkAdded /> : <MdOutlineBookmarkAdd />}
     </button>
   );
 }

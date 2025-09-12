@@ -10,9 +10,3 @@ export const signUp = (formData) => {
 export const signIn = (formData) => {
   return axios.post(BASE_URL + "sign-in/", formData);
 };
-
-export const getUserDetail = () => {
-  return axios.get(BASE_URL + "user-details/", {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  });
-};

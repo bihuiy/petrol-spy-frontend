@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    min-height: calc(100vh - 80px); 
     font-family: "Poppins", sans-serif;
     color: #4c506d;
   }

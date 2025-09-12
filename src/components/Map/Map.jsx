@@ -39,8 +39,6 @@ export default function Map() {
       const { data } = await stationIndex(bbox);
       setStationData(data);
     } catch (error) {
-      console.log(error);
-      
       setError(error);
     }
   }, []);
@@ -104,7 +102,7 @@ export default function Map() {
               key={station.id}
               map={mapRef.current}
               station={station}
-              isActive={activeMarker?.id === station.id}
+              isActive={activeMarker?.station_id === station.station_id}
               onClick={handleMarkerClick}
             />
           );

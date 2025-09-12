@@ -9,8 +9,8 @@ export const bookmarkIndex = () => {
   });
 };
 
-export const tagUpdate = (bookmarkId, formData) => {
-  return axios.put(`${BASE_URL}${bookmarkId}/tag/`, formData, {
+export const tagUpdate = (bookmarkId, tag) => {
+  return axios.put(`${BASE_URL}${bookmarkId}/tag/`, tag, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
@@ -18,7 +18,7 @@ export const tagUpdate = (bookmarkId, formData) => {
 };
 
 export const tagDelete = (bookmarkId) => {
-  return axios.delete(`${BASE_URL}${bookmarkId}/tag`, {
+  return axios.delete(`${BASE_URL}${bookmarkId}/tag/`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

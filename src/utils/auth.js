@@ -20,7 +20,7 @@ export const getUser = () => {
   // 3. If a token exists, we need to extract the payload string (middle)
   const payloadString = token.split(".")[1];
   // 4. We then decode the payload string into an object by b64 decoding
-  const { user, exp } = JSON.parse(atob(payloadString));
+  const { user, exp } = JSON.parse(atob(payloadString));  
   // 5. Ensure the token is still within the expiry date
   const today = Date.now() / 1000;
   if (today > exp) {

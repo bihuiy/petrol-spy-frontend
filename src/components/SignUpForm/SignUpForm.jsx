@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import { getUser, setToken } from "../../utils/auth";
 import { UserContext } from "../../contexts/UserContext";
-import ErrorPage from "../ErrorPage/ErrorPage";
+import ImageUploadField from "../ImageUploadField/ImageUploadField";
 
 export default function SignUpForm() {
   // * Context
@@ -16,8 +16,10 @@ export default function SignUpForm() {
     username: "",
     password: "",
     password_confirmation: "",
+    profileImage: "",
   });
 
+  const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState({});
 
   // * Location variables
@@ -34,8 +36,6 @@ export default function SignUpForm() {
       navigate("/");
     } catch (error) {
       setError(error.response.data);
-      console.log(error);
-      
     }
   };
 
@@ -45,11 +45,20 @@ export default function SignUpForm() {
     setFormData(newFormData);
   };
 
-  //if (error) return <ErrorPage error={error} />;
+  const setProfileImage = (imageURL) => {
+    setFormData({ ...formData, profileImage: imageURL });
+  };
 
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Create an account</h2>
+      <ImageUploadField
+        labelText="Upload a profile image"
+        fieldName="profileImage"
+        setImage={setProfileImage}
+        imageURL={formData.profileImage}
+        setIsUploading={setIsUploading}
+      />
       <label htmlFor="email">Email</label>
       <input
         type="email"
@@ -96,7 +105,9 @@ export default function SignUpForm() {
         <p className="error-message">{error.password_confirmation}</p>
       )}
 
-      <button type="submit">Create</button>
+      <button type="submit" disabled={isUploading}>
+        {isUploading ? "Image uploading..." : "Create"}
+      </button>
     </form>
   );
 }

@@ -1,5 +1,5 @@
 .station-card {
-  display: flex;
+    display: flex;
     flex-direction: column;
     gap: 0.5rem;
     min-width: 220px;
@@ -14,7 +14,8 @@
   
   .station-address {
     font-size: 0.9rem;
-    color: #555;
+    color: #4c506d;
+    margin-top: 0.4rem;
   }
   
   .station-address hr {
@@ -39,5 +40,4 @@
     font-weight: bold;
     margin-right: 4px;
   }
-  
   

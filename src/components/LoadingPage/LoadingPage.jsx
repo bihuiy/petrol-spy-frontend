@@ -1,9 +1,11 @@
 import "./LoadingPage.css";
+import spinner from "../../assets/spinner.gif";
 
 export default function LoadingPage() {
   return (
-    <main className="loading-page">
+    <div className="loading-page">
+      <img src={spinner} alt="spinner" className="spinner" />
       <h1>Loading...</h1>
-    </main>
+    </div>
   );
 }

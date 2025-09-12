@@ -7,6 +7,7 @@ import App from "./App.jsx";
 import { UserProvider } from "./contexts/UserContext.jsx";
 import { PetrolProvider } from "./contexts/PetrolContext.jsx";
 import { MapProvider } from "./contexts/MapContext.jsx";
+import { BookmarkProvider } from "./contexts/BookmarkContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,7 +15,9 @@ createRoot(document.getElementById("root")).render(
       <UserProvider>
         <MapProvider>
           <PetrolProvider>
-            <App />
+            <BookmarkProvider>
+              <App />
+            </BookmarkProvider>
           </PetrolProvider>
         </MapProvider>
       </UserProvider>

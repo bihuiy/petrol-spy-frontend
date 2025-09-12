@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 const MapContext = createContext();
 
 const MapProvider = ({ children }) => {
-  const INITIAL_CENTER = [151.1911, -33.8988];
+  const INITIAL_CENTER = [151.1211, -33.777];
   const INITIAL_ZOOM = 13.11;
   const [center, setCenter] = useState(INITIAL_CENTER);
   const [zoom, setZoom] = useState(INITIAL_ZOOM);

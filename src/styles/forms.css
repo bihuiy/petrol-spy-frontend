@@ -1,7 +1,8 @@
 .form-section {
-  height: 100vh;
+  height: calc(100vh - 134px);
   gap: 1rem;
   width: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
 .form-section .link {

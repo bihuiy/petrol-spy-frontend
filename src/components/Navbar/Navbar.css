@@ -27,6 +27,7 @@ header a:hover {
   font-size: 1.2rem;
   font-weight: 800;
 }
+
 .map-control {
   display: flex;
   align-items: center;
@@ -36,8 +37,8 @@ header a:hover {
 
 .sidebar {
   background-color: #4c506d;
-    color: #fff;
-    padding: 6px 12px;
+  color: #fff;
+  font-size: 1.2rem;
     
 }
 
@@ -54,7 +55,7 @@ header a:hover {
 }
 
 .petrol-filter select {
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 6px;
   border: none;
   font-size: 0.9rem;

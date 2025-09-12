@@ -33,11 +33,12 @@ export default function PriceRecordPage() {
     getPriceRecordData();
   }, [user]);
 
+  // * Function
   const handleClick = async (priceRecordId) => {
+    if (!user) return navigate("/sign-up");
     try {
+      setPriceRecords(priceRecords.filter((p) => p.id !== priceRecordId));
       await priceRecordDelete(priceRecordId);
-      const { data } = await priceRecordIndex();
-      setPriceRecords(data);
     } catch (error) {
       setError(error);
     }
@@ -57,12 +58,13 @@ export default function PriceRecordPage() {
           placeholder="Search by name, address or id..."
           value={query}
           onChange={(event) => setQuery(event.target.value)}
+          className="search-input"
         />
       </div>
       <div className="price-record-grid">
         {filteredRecords && filteredRecords.length > 0 ? (
           filteredRecords.map((priceRecord) => (
-            <div className="price-record-cards" key={priceRecord.id}>
+            <div className="price-record-card" key={priceRecord.id}>
               <PriceRecordCard priceRecord={priceRecord} />
               <button onClick={() => handleClick(priceRecord.id)}>
                 <MdDelete />
@@ -70,7 +72,7 @@ export default function PriceRecordPage() {
             </div>
           ))
         ) : (
-          <p>You don't have any records yet.</p>
+          <p className="empty-bookmarks">You don't have records.</p>
         )}
       </div>
     </main>

@@ -8,28 +8,26 @@ export default function PriceRecordCard({ priceRecord }) {
   const { station_id, name, address } = bookmarked_station || {};
 
   return (
-    <div>
-      <h3>
+    <>
+      <div className="price-record-name">
         {name} (ID {station_id})
-      </h3>
-      <p>{address}</p>
-      <p>Snapshot Time: {new Date(timestamp).toLocaleString()}</p>
-      <table className="price-table">
-        <thead>
-          <tr>
-            {snapshot_price.map((fuel) => (
-              <th key={fuel.fuel_type}>{fuel.fuel_type}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {snapshot_price.map((fuel) => (
-              <td key={fuel.fuel_type}>{fuel.price.toFixed(2)}</td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      </div>
+
+      <div className="price-record-address">{address}</div>
+
+      <div className="snapshot-time">
+        Snapshpt Time: {new Date(timestamp).toLocaleString()}
+        <hr />
+      </div>
+
+      <div className="price-record-prices">
+        {snapshot_price.map((fuel) => (
+          <div className="price-item" key={fuel.id}>
+            <span className="fuel-type">{fuel.fuel_type}</span>:{" "}
+            <span className="fuel-price">{fuel.price}</span>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
