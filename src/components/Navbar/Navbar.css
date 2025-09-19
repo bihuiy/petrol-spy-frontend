@@ -39,7 +39,6 @@ header a:hover {
   background-color: #4c506d;
   color: #fff;
   font-size: 1.2rem;
-    
 }
 
 .petrol-filter {
@@ -87,14 +86,55 @@ nav a:hover {
   background: #e9ecef;
 }
 
-nav .tablet-up {
-  display: none;
+@media (min-width: 319px) and (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  header {
+    padding: 0.4rem;
+  }
+  .logo {
+    gap: 0;
+  }
+  .sidebar {
+    display: none;
+  }
+  .petrol-filter {
+    gap: 0.2rem;
+    margin-left: 0.2rem;
+  }
+  .petrol-filter select {
+    padding: 2px 5px;
+  }
+  nav {
+    gap: 0.5rem;
+  }
+  .nav-btn {
+    padding: 8px 6px;
+  }
 }
-
-@media (min-width: 768px) {
-  nav .tablet-up {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+@media (min-width: 481px) and (max-width: 1200px) {
+  body {
+    font-size: 15px;
+  }
+  header {
+    padding: 0.8rem;
+  }
+  .logo {
+    gap: 0rem;
+  }
+  .petrol-filter {
+    gap: 0.2rem;
+    margin-left: 0;
+  }
+  .petrol-filter select {
+    padding: 5px 8px;
+  }
+  nav {
+    gap: 0.5rem;
+  }
+  .nav-btn {
+    padding: 4px 3px;
+    font-size: 14px
   }
 }

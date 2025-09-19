@@ -1,12 +1,32 @@
-# React + Vite
+# Petrol Spy👓 
+Description: Petrol Spy is a full-stack web application that helps users track real-time petrol prices and manage their favorite stations.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+With React on the frontend and Django REST Framework on the backend, this project allows users to:
 
-Currently, two official plugins are available:
+- Browse petrol stations and view current prices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Create an account and log in to save personalized bookmarks across sessions.
 
-## Expanding the ESLint configuration
+- Bookmark favorite stations to easily access them later.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- View price history for each bookmarked station to make informed decisions.
+
+! [Homepage Screenshot](./src/assets/PetrolSpyHomepage.png)
+
+## Deployment link
+https://petrolspy.netlify.app/
+
+## Getting Started / Code Installation
+Follow these steps to run the project locally:
+
+1. Clone the repository
+
+    `git clone https://github.com/bihuiy/petrol-spy-frontend.git`
+
+    `cd petrol-spy-frontend`
+
+2. install dependencies `npm install`
+
+3. start the development server `npm run dev`
+
+## Timeframe & Working Team (Solo/Pair/Group)
