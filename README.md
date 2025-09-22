@@ -69,6 +69,7 @@ This project was completed individually over one week, from 27th August to 5th S
 - Django ORM (for database queries)
 - Django Environ (for managing environment variables)
 - PostgreSQL (relational database)
+- Neon
 - Django CORS Headers (for handling cross-origin requests)
 - Django Authentication (user sign-in/sign-up)
 - Integration with external Petrol Price API (fetching real-time petrol prices)
