@@ -21,7 +21,7 @@ function App() {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/bookmarks" element={<BookmarkPage />} />
-        <Route path="price-records" element={<PriceRecordPage />} />
+        <Route path="/price-records" element={<PriceRecordPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
