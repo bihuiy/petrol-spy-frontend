@@ -214,11 +214,6 @@ Below is my detailed day-by-day breakdown of the development process, which I or
   - Deployed frontend to **Netlify** and backend to **Heroku**
   - Added **Heroku Scheduler** to update fuel prices daily
 
-After planning and tracking my daily tasks on Trello, I followed my plan to build the project step by step.  
-In this section, I will walk you through the key stages of the project build in chronological order, highlighting important decisions, problem-solving approaches, and key code snippets that I am particularly proud of.
-
-Rather than documenting every single commit, I will focus on the most significant milestones and technical challenges, explaining **what I built, how I built it, and why I made certain decisions**.
-
 ### Code Snippets
 
 1. Dynamic Map Bounds Query:
