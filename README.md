@@ -1,4 +1,4 @@
-# Petrol Spy👓
+# Petrol Spy 🕶️
 
 Description: Petrol Spy is a full-stack web application that helps users track real-time petrol prices and manage their favorite stations.
 
@@ -12,7 +12,7 @@ With React on the frontend and Django REST Framework on the backend, this projec
 
 - View price history for each bookmarked station to make informed decisions.
 
-! [Homepage Screenshot](./src/assets/PetrolSpyHomepage.png)
+![Homepage Screenshot](./src/assets/PetrolSpyHomepage.png)
 
 ## Deployment link
 
