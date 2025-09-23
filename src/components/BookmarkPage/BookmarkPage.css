@@ -9,7 +9,22 @@
     margin-bottom: 1.5rem;
     color: #4c506d;
   }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 5px;
+  }
   
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
   .search-input {
     padding: 0.5rem 1rem;
     border-radius: 6px;

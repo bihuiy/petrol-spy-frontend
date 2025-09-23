@@ -35,7 +35,8 @@ export default function SignUpForm() {
       setUser(getUser());
       navigate("/");
     } catch (error) {
-      setError(error.response.data);
+      //console.log(error);
+      setError(error.message);
     }
   };
 

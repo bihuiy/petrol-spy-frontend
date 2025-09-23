@@ -4,7 +4,7 @@ export default function PriceRecordCard({ priceRecord }) {
   if (!priceRecord) return null;
 
   const { timestamp, bookmark_detail, snapshot_price } = priceRecord;
-  const { bookmarked_station } = bookmark_detail || {};
+  const { bookmarked_station, tag } = bookmark_detail || {};
   const { station_id, name, address } = bookmarked_station || {};
 
   return (
@@ -13,7 +13,9 @@ export default function PriceRecordCard({ priceRecord }) {
         {name} (ID {station_id})
       </div>
 
-      <div className="price-record-address">{address}</div>
+      <div className="price-record-address">
+        {address} ({tag})
+      </div>
 
       <div className="snapshot-time">
         Snapshpt Time: {new Date(timestamp).toLocaleString()}

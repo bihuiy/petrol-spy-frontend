@@ -13,9 +13,7 @@ import { BookmarkContext } from "../../contexts/BookmarkContext";
 export default function BookmarkPage() {
   // * Contexts
   const { user } = useContext(UserContext);
-  console.log(user);
-  const { bookmarks, isLoading, error } =
-    useContext(BookmarkContext);
+  const { bookmarks, isLoading, error } = useContext(BookmarkContext);
 
   // * State
   const [query, setQuery] = useState("");
@@ -27,7 +25,14 @@ export default function BookmarkPage() {
 
   return (
     <main className="bookmark-page">
-      <h1>{user?.username}'s bookmarked stations</h1>
+      <div className="profile-header">
+        <img
+          src={user?.profileImage}
+          alt={`${user?.username}'s avatar`}
+          className="profile-avatar"
+        />
+        <h1>{user?.username}'s bookmarked stations</h1>{" "}
+      </div>
       <div>
         <input
           type="text"

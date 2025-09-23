@@ -1,8 +1,11 @@
 import "./Tag.css";
 import { tagUpdate, tagDelete } from "../../services/bookmarkService";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { BookmarkContext } from "../../contexts/BookmarkContext";
 
 export default function Tag({ bookmark }) {
+  // * Context
+  const { bookmarks, setBookmarks } = useContext(BookmarkContext);
   // * State
   const [tagInput, setTagInput] = useState(bookmark.tag || "");
 
@@ -17,9 +20,17 @@ export default function Tag({ bookmark }) {
       try {
         if (tagInput.trim() !== "") {
           await tagUpdate(bookmark.id, { tag: tagInput });
+          setBookmarks(
+            bookmarks.map((b) =>
+              b.id === bookmark.id ? { ...b, tag: tagInput } : b
+            )
+          );
         } else {
           await tagDelete(bookmark.id);
           setTagInput("");
+          setBookmarks(
+            bookmarks.map((b) => (b.id === bookmark.id ? { ...b, tag: "" } : b))
+          );
         }
       } catch (error) {
         console.log(error);

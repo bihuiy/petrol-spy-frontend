@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { priceRecordIndex } from "../../services/priceRecordService";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import PriceRecordCard from "../PriceRecordCard/PriceRecordCard";
+import Tag from "../Tag/Tag";
 import { searchRecords } from "../../utils/recordSearch";
 import { MdDelete } from "react-icons/md";
 import { priceRecordDelete } from "../../services/priceRecordService";
@@ -51,7 +52,14 @@ export default function PriceRecordPage() {
 
   return (
     <main className="price-record-page">
-      <h1>{user.username}'s price record</h1>
+      <div className="profile-header">
+        <img
+          src={user?.profileImage}
+          alt={`${user?.username}'s avatar`}
+          className="profile-avatar"
+        />
+        <h1>{user?.username}'s price record</h1>{" "}
+      </div>
       <div>
         <input
           type="text"

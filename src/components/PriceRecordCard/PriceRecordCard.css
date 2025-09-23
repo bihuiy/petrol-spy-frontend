@@ -31,4 +31,6 @@
     margin-right: 4px;
   }
   
-  
+  .price-record-card p {
+    margin: 0;
+  }
