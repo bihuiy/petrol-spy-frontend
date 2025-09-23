@@ -11,7 +11,7 @@ export default function SignInForm() {
 
   // * State
   const [formData, setFormData] = useState({
-    username: "",
+    identifier: "",
     password: "",
   });
   const [error, setError] = useState({});
@@ -40,13 +40,13 @@ export default function SignInForm() {
   return (
     <form className="form" onSubmit={handleSubmit}>
       <h2>Sign in</h2>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="identifier">Username or Email</label>
       <input
         type="text"
-        name="username"
-        id="username"
-        placeholder="Your username"
-        value={formData.username}
+        name="identifier"
+        id="identifier"
+        placeholder="Your username or email"
+        value={formData.identifier}
         onChange={handleChange}
       />
 
