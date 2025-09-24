@@ -2,15 +2,15 @@
 
 Description: Petrol Spy is a full-stack web application that helps users track real-time petrol prices and manage their favorite stations.
 
-With React on the frontend and Django REST Framework on the backend, this project allows users to:
+Users can browse all petrol stations and their prices without signing up or logging in.  
+They can freely drag and zoom the interactive map to explore different areas, the navbar dynamically displays the current longitude, latitude, and zoom level, updating in real-time as the user moves the map.
 
-- Browse petrol stations and view current prices.
+The navbar also includes a petrol filter, allowing users to select the fuel type they care about most. The map markers immediately update to display prices for the selected fuel type, no need to click into each marker.
 
-- Create an account and log in to save personalized bookmarks across sessions.
+Users can click on any marker to open a popup showing detailed station information, including brand, name, address, and prices for every available fuel type.
 
-- Bookmark favorite stations to easily access them later.
-
-- View price history for each bookmarked station to make informed decisions.
+Once logged in, users can bookmark their frequently visited stations and view them on a dedicated Bookmark Page.  
+From there, users can create “price snapshots” of bookmarked stations and save them to the Price Record Page. This allows them to build a price history and make data-driven decisions about when to refuel.
 
 ![Homepage Screenshot](./src/assets/PetrolSpyHomepage.png)
 
