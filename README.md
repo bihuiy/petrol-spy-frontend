@@ -20,9 +20,49 @@ https://petrolspy.netlify.app/
 
 ## Getting Started / Code Installation
 
-Follow these steps to run the project locally:
+Follow these steps to run the project locally (Clone **backend** and **frontend** separately):
 
-1. Clone the repository
+### Set up backend
+
+1. Clone the backend repository
+
+   `git clone https://github.com/bihuiy/petrol-spy-backend.git`
+
+   `cd petrol-spy-backend`
+
+2. Install dependencies `npm install`
+
+3. Set up environment variables
+
+   Create a .env file in the root directory of the project folder and add the following variables:
+
+   `SECRET_KEY=your-secret-key`
+
+   `PGHOST=your-database-host`
+
+   `PGDATABASE=your-database-name`
+
+   `PGUSER=your-database-user`
+
+   `PGPASSWORD=your-database-password`
+
+   `DEBUG=TRUE`
+
+   `API_BASE_URL=https://api.onegov.nsw.gov.au`
+
+   `ACCESS_TOKEN_URL=/oauth/client_credential/accesstoken`
+
+   `UPDATE_PRICES_URL=/FuelPriceCheck/v1/fuel/prices/new`
+
+   `API_KEY=your-api-key`
+
+   `AUTHORIZATION_HEADER=your-authorization-header`
+
+4. Start the development server `npm run dev` (Start the backend first, then, in a separate terminal, start the frontend)
+
+### Set up frontend
+
+1. Clone the frontend repository (in a separate folder)
 
    `git clone https://github.com/bihuiy/petrol-spy-frontend.git`
 
@@ -34,13 +74,13 @@ Follow these steps to run the project locally:
 
    Create a .env file in the root directory and add the following variables:
 
-   `VITE_API_URL=https://petrolspy-8255c7196974.herokuapp.com`
+   `VITE_API_URL=http://localhost:3000` # URL of your backend
 
-   `VITE_MAPBOX_ACCESS_TOKEN=pk.eyJ1Ijoidml2aWVueWFuZzciLCJhIjoiY21ldTFlcG9jMDJjbzJpcHhhNDZyazB4bCJ9.ppKZ38utyXfhG-PG8E7fZw`
+   `VITE_MAPBOX_ACCESS_TOKEN=pk.eyJ1Ijoidml2aWVueWFuZzciLCJhIjoiY21ldTFlcG9jMDJjbzJpcHhhNDZyazB4bCJ9.ppKZ38utyXfhG-PG8E7fZw` # or your mapbox token
 
-   `VITE_CLOUDINARY_URL=https://api.cloudinary.com/v1_1/dnycwkg4c/image/upload`
+   `VITE_CLOUDINARY_URL=your-cloudinary-upload-url`
 
-   `VITE_UPLOAD_PRESET=petrolspy`
+   `VITE_UPLOAD_PRESET=your-cloudinary-upload-preset`
 
 4. Start the development server `npm run dev`
 
